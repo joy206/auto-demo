@@ -1,9 +1,26 @@
-__pycache *.pyc .vscode chromedriver allure-report
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# === IDE ===
+.vscode/
 .idea/
 *.iml
+
+# === 依赖/构建 ===
 venv/
 node_modules/
 target/
 dist/
-.DS_Store
+
+# === 报告/驱动 ===
+allure-report/
 allure-results/
+chromedriver
+chromedriver.exe
+
+# === OS ===
+.DS_Store
+Thumbs.db
