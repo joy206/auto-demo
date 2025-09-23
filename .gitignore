@@ -1,1 +1,9 @@
 __pycache *.pyc .vscode chromedriver allure-report
+.idea/
+*.iml
+venv/
+node_modules/
+target/
+dist/
+.DS_Store
+allure-results/
