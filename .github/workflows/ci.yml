@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  ui-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Install Chrome & Driver
+      uses: browser-actions/setup-chrome@v1
+      with:
+        chrome-version: stable
+
+    - name: Run UI tests
+      env:
+        HEADLESS: true
+      run: |
+        python -m unittest discover -s tests/ui -p "test_*.py" -v
+
+    - name: Upload Allure report（可选）
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: allure-results
+        path: allure-results/
