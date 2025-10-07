@@ -2,7 +2,7 @@ import pytest
 from selenium.webdriver.common.by import By
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def login(browser):
     browser.get("https://www.saucedemo.com")
     browser.find_element(By.ID, "user-name").send_keys("standard_user")

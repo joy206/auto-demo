@@ -4,7 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def login(browser):
     browser.get("https://www.saucedemo.com")
     browser.find_element(By.ID, "user-name").send_keys("standard_user")

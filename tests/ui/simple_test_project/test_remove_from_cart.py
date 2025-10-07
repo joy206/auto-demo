@@ -3,9 +3,8 @@ import pytest
 from selenium.webdriver.common.by import By
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def login(browser):
-    """模块级登录：整个文件只登录一次"""
     browser.get("https://www.saucedemo.com")
     browser.find_element(By.ID, "user-name").send_keys("standard_user")
     browser.find_element(By.ID, "password").send_keys("secret_sauce")
