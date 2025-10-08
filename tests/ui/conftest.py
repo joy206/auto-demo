@@ -1,9 +1,31 @@
-import os, platform
+import os, platform, glob
+import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # 当前文件所在目录
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')) # 定位到根目录
+
+def _pick_local_driver():
+    drivers_dir = os.path.join(ROOT_DIR, "drivers")
+    if not os.path.isdir(drivers_dir):
+        return None
+
+    system = platform.system().lower()
+    pattern = {
+        "windows": "chromedriver*.exe",
+        "linux": "chromedriver*",
+        "darwin": "chromedriver*"
+    }.get(system, "chromedriver*")
+
+    candidates = glob.glob(os.path.join(drivers_dir, pattern))
+    if not candidates:
+        return None
+
+    driver_path = candidates[0]
+    if system != "windows":
+        os.chmod(driver_path, 0o755)
+    return driver_path
 
 @pytest.fixture(scope="function", autouse=True)
 def browser():
@@ -12,19 +34,8 @@ def browser():
     opt.add_argument("--no-sandbox")
     opt.add_argument("--disable-dev-shm-usage")
 
-    if os.getenv("LOCAL_DRIVER") == "1":
-        # 自备驱动：支持任意路径
-        driver_path = os.getenv(
-            "CHROME_DRIVER_PATH",
-            os.path.join(
-                BASE_DIR,
-                "drivers",
-                f"chromedriver-{platform.system().lower()}"
-                f"{'.exe' if platform.system() == 'Windows' else ''}"
-            )
-        )
-    else:
-        # 自动下载驱动
+    driver_path = _pick_local_driver()
+    if driver_path is None:
         from webdriver_manager.chrome import ChromeDriverManager
         driver_path = ChromeDriverManager().install()
 
