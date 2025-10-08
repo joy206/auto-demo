@@ -1,6 +1,8 @@
 import pytest
+from selenium import webdriver
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 @pytest.fixture(scope="function")
 def login(browser):
@@ -11,7 +13,9 @@ def login(browser):
 
 def test_add_to_cart(browser, login):
     browser.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
-    badge = browser.find_element(By.CLASS_NAME, "shopping_cart_badge")
+    badge = WebDriverWait(browser, 5).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "shopping_cart_badge"))
+    )
     assert badge.text == "1"
 
     browser.find_element(By.CLASS_NAME, "shopping_cart_link").click()
