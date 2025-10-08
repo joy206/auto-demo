@@ -17,6 +17,10 @@ jobs:
     # 对 CI 隐藏本地驱动，强制走 webdriver-manager
     - name: Hide local drivers for CI
       run: mv drivers _drivers_off 
+    - name: Set webdriver-manager mirror
+      run: |
+         echo "WDM_MIRROR_URL=https://npmmirror.com/mirrors/chromedriver" >> $GITHUB_ENV
+         echo "WDM_SSL_VERIFY=false" >> $GITHUB_ENV
 
     - name: Set up Python
       uses: actions/setup-python@v4
