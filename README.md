@@ -30,3 +30,19 @@ tests/ui/
 requirements.txt        # 一键安装依赖
 .github/workflows/ci.yml # 云跑配置
 ```
+
+## 更多运行方式
+- 有头浏览器
+  ```bash
+  HEAD=0 pytest tests/ui -v
+  ```
+
+默认自动下载 chromedriver（需联网）
+
+- 自备驱动（任意版本Chrome）：
+  ```bash
+  export LOCAL_DRIVER=1
+  export CHROME_DRIVER_PATH=/你的/绝对/路径/chromedriver
+  pytest tests/ui -v
+  ```
+
