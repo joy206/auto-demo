@@ -18,7 +18,7 @@ def _pick_local_driver():
         "darwin": "chromedriver*"
     }.get(system, "chromedriver*")
 
-    candidates = glob.glob(os.path.join(drivers_dir, pattern))
+    candidates = glob.glob(os.path.join(drivers_dir, "**", pattern), recursive=True)
     if not candidates:
         return None
 
