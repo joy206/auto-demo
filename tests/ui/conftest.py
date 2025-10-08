@@ -12,6 +12,8 @@ def _pick_local_driver():
         return None
 
     system = platform.system().lower()
+    print(">>> local candidates:", glob.glob(os.path.join(ROOT_DIR, "drivers", "**", "chromedriver*"), recursive=True))
+    print(">>> final driver_path:", driver_path)
     pattern = {
         "windows": "chromedriver*.exe",
         "linux": "chromedriver*",
