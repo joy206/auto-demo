@@ -22,5 +22,6 @@ def test_add_to_cart(browser, login):
     assert badge.text == "1"
 
     browser.find_element(By.CLASS_NAME, "shopping_cart_link").click()
+    WebDriverWait(browser, 10).until(EC.url_contains("cart"))
     items = browser.find_elements(By.CLASS_NAME, "cart_item")
     assert len(items) == 1
