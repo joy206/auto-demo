@@ -13,15 +13,20 @@ def login(browser):
 
 def test_add_to_cart(browser, login):
     browser.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
-    WebDriverWait(browser, 10).until(
-        EC.text_to_be_present_in_element((By.ID, "remove-sauce-labs-backpack"), "Remove")
-    )
-    badge = WebDriverWait(browser, 5).until(
+    badge = WebDriverWait(browser, 10).until(
         EC.visibility_of_element_located((By.CLASS_NAME, "shopping_cart_badge"))
     )
     assert badge.text == "1"
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable((By.ID, "remove-sauce-labs-backpack"))
+    )
+
     browser.find_element(By.CLASS_NAME, "shopping_cart_link").click()
+
     WebDriverWait(browser, 10).until(EC.url_contains("cart"))
-    items = browser.find_elements(By.CLASS_NAME, "cart_item")
+
+    items = WebDriverWait(browser, 10).until(
+        EC.presence_of_all_elements_located((By.CLASS_NAME, "cart_item"))
+    )
     assert len(items) == 1
