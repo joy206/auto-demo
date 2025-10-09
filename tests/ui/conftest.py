@@ -33,7 +33,7 @@ def _pick_local_driver():
 def browser():
     opt = Options()
     opt.add_argument("--window-size=1920,1080")
-    opt.add_argument("--disable-gpu"
+    opt.add_argument("--disable-gpu")
     opt.add_argument("--headless=new")          # CI 无头
     opt.add_argument("--no-sandbox")
     opt.add_argument("--disable-dev-shm-usage")
