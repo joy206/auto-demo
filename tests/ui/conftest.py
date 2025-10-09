@@ -19,6 +19,8 @@ def _pick_local_driver():
     }.get(system, "chromedriver*")
 
     candidates = glob.glob(os.path.join(drivers_dir, "**", pattern), recursive=True)
+    # 只保留路径中匹配当前平台名的条目
+    candidates = [p for p in candidates if system in os.path.normpath(p).lower()]
     if not candidates:
         return None
 
