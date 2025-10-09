@@ -13,6 +13,7 @@ def login(browser):
 
 def test_add_to_cart(browser, login):
     browser.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
+    WebDriverWait(browser, 10).until(lambda d: d.execute_script("return jQuery.active==0"))
     badge = WebDriverWait(browser, 5).until(
         EC.visibility_of_element_located((By.CLASS_NAME, "shopping_cart_badge"))
     )
