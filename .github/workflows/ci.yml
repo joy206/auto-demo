@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ]
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '11 14 * * *'
 
 jobs:
   ui-test:
