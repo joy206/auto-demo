@@ -14,6 +14,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+   - name: Upload debug screenshots
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: debug-images
+        path: "*.png"
+
     # 对 CI 隐藏本地驱动，强制走 webdriver-manager
     # - name: Hide local drivers for CI
     #  run: mv drivers _drivers_off 
