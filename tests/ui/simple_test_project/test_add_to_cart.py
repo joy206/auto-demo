@@ -14,6 +14,11 @@ def login(browser):
 
 def test_add_to_cart(browser, login):
     browser.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
+    png = browser.get_screenshot_as_base64()
+    with open("debug_linux.png", "wb") as f:
+        f.write(base64.b64decode(png))
+    print(">>> current URL :", browser.current_url)
+    print(">>> cart badge  :", browser.find_element(By.CLASS_NAME, "shopping_cart_link").text)
     badge = WebDriverWait(browser, 10).until(
         EC.visibility_of_element_located((By.CLASS_NAME, "shopping_cart_badge"))
     )
