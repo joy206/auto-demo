@@ -15,10 +15,12 @@ def login(browser):
 def test_add_to_cart(browser, login):
     browser.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
     print(">>> current URL :", browser.current_url)
+    print(">>> cart badge  :", browser.find_element(By.CLASS_NAME, "shopping_cart_badge").text)
+    time.sleep(2)
     badge = WebDriverWait(browser, 20).until(
         EC.visibility_of_element_located((By.CLASS_NAME, "shopping_cart_badge"))
     )
-    print(">>> cart badge  :", browser.find_element(By.CLASS_NAME, "shopping_cart_badge").text)
+
     assert badge.text == "1"
 
     WebDriverWait(browser, 10).until(
