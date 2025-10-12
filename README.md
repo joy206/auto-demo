@@ -1,8 +1,7 @@
-# UI-Auto-Demo
+i# UI-Auto-Demo
 
-![CI](https://github.com/lll/auto-demo/workflows/CI/badge.svg)
-
-最小可运行集合 · Selenium + pytest · 数据驱动 · GitHub Actions 每日无头跑
+** 此分支为日常开发分支，CI可能处于失败状态，仅供迭代使用。**
+最小可运行集合 · Selenium + pytest
 
 ## 一键本地跑
 ```bash
@@ -10,8 +9,9 @@ pip install -r requirements.txt
 pytest tests/ui -v
 ```
 
-## 最新结果
-✅ CI 绿色打勾，pytest 100% 通过
+## 当前任务
+-[ ]补全selenium测试用例
+-[ ]修改测试用例中的bug
 
 ## 技术栈
 | 技术     | 版本   |
