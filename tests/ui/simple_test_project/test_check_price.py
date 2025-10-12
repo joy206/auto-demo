@@ -1,4 +1,5 @@
 import pytest
+import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -23,6 +24,7 @@ def test_checkout_flow(browser, login):
 
     # 进入购物车页面
     browser.find_element(By.CLASS_NAME, "shopping_cart_link").click()
+    time.sleep(2)
     WebDriverWait(browser, 3).until(EC.url_contains("cart.html"))
 
     # 结算
