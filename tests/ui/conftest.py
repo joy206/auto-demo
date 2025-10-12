@@ -19,8 +19,15 @@ def _pick_local_driver():
     }.get(system, "chromedriver*")
 
     candidates = glob.glob(os.path.join(drivers_dir, "**", pattern), recursive=True)
-    # 只保留路径中匹配当前平台名的条目
-    candidates = [p for p in candidates if system in os.path.normpath(p).lower()]
+    print(">>> raw candidates :", candidates)
+
+    platform_map = {"windows": "win", "linux": "linux", "darwin": "max"}
+    candidates = [
+        p for p in candidates
+        if os.path.basename(os.path.dirname(p)).lower() == platform_map[system]
+    ]
+    print(">>> candidates after filterd:", candidates)
+
     if not candidates:
         return None
 
@@ -39,7 +46,10 @@ def browser():
     opt.add_argument("--disable-dev-shm-usage")
 
     driver_path = _pick_local_driver()
+    print(">>> local candidates:", glob.glob(os.path.join(ROOT_DIR, "drivers", "**", "chromedriver*"),recursive=True))
+    print(">>> final driver_path:", driver_path)
     if driver_path is None:
+        print(">>> 本地未命中，即将调用webdriver-manager...")
         from webdriver_manager.chrome import ChromeDriverManager
         driver_path = ChromeDriverManager().install()
 

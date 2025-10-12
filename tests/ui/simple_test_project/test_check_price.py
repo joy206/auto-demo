@@ -20,10 +20,6 @@ def test_checkout_flow(browser, login):
     WebDriverWait(browser, 3).until(EC.text_to_be_present_in_element(
         (By.CLASS_NAME, "shopping_cart_badge"),"1"
     ))
-    png = browser.get_screenshot_as_base64()
-    with open("debug_check.png", "wb") as f:
-        f.write(base64.b64decode(png))
-    print(">>> current URL :", browser.current_url)
 
     # 进入购物车页面
     browser.find_element(By.CLASS_NAME, "shopping_cart_link").click()
