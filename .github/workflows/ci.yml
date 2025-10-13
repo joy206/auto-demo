@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ test-clean ]
+    branches: [test-clean]
   pull_request:
-    branches: [ test-clean ]
+    branches: [test-clean]
   schedule:
     - cron: '11 14 * * *'
 
