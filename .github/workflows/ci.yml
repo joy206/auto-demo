@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ test-clean ]
   pull_request:
-    branches: [ main ]
+    branches: [ test-clean ]
   schedule:
     - cron: '11 14 * * *'
 
@@ -13,10 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-
-    # 对 CI 隐藏本地驱动，强制走 webdriver-manager
-    # - name: Hide local drivers for CI
-    #  run: mv drivers _drivers_off 
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -36,11 +32,4 @@ jobs:
       env:
         HEADLESS: true
       run: |
-        pytest tests/ui -q
-
-    - name: Upload Allure report（可选）
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: allure-results
-        path: allure-results/
+        pytest tests/ui -v

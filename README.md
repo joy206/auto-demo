@@ -1,8 +1,8 @@
-# Auto-Demo
+# Auto-Demo（test-clean 稳定版）
 
-![CI](https://github.com/joy206/auto-demo/workflows/CI/badge.svg)
+![CI](https://github.com/joy206/auto-demo/workflows/CI/badge.svg?branch=test-clean)
 
-最小可运行集合 · Selenium + pytest · GitHub Actions 每日无头跑
+最小可运行集合 · Selenium + pytest
 
 ## 一键本地跑
 ```bash
@@ -11,7 +11,7 @@ pytest tests/ui -v
 ```
 
 ## 最新结果
-✅ CI 绿色打勾，pytest 100% 通过
+✅ CI 绿色打勾，pytest通过
 
 ## 技术栈
 | 技术     | 版本   |
@@ -23,16 +23,16 @@ pytest tests/ui -v
 ## 目录
 ```
 tests/ui/
-├── conftest.py         # function级，每条用例自动分配新浏览器
+├── conftest.py          # function级，每条用例自动分配新浏览器
 ├── simple_test_project/ # 简单业务用例
-│   └── test_*.py
-├── base_page_project/   # PO 模式业务用例
-requirements.txt        # 一键安装依赖
+│   └── test_*.py        
+requirements.txt         # 一键安装依赖
 .github/workflows/ci.yml # 云跑配置
 ```
 
 ## 更多运行方式
-- 有头浏览器
+- 无头（默认，与CI一致）
+- 有头（本地想看界面）
   ```bash
   HEAD=0 pytest tests/ui -v
   ```
