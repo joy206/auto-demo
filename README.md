@@ -2,7 +2,7 @@
 
 ** 此分支为日常开发分支**，CI可能处于失败状态，仅供迭代使用。
 ** 稳定运行版本**请切换到
-[![CI](https://github.com/joy206/auto-demo/actions/workflows/ci.yml/badge.svg?branch=test-clean)](https://github.com/joy206/auto-demo/test-clean)
+[![CI](https://github.com/oy206/auto-demo/actions/workflows/ci.yml/badge.svg?branch=test-clean)](https://github.com/joy206/auto-demo/tree/test-clean)
 
 ## 一键本地跑
 ```bash
