@@ -1,15 +1,59 @@
+import os, platform, glob
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
-@pytest.fixture(scope="session", autouse=True)
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')) # 定位到根目录
+
+def _pick_local_driver():
+    drivers_dir = os.path.join(ROOT_DIR, "drivers")
+    if not os.path.isdir(drivers_dir):
+        return None
+
+    system = platform.system().lower()
+    pattern = {
+        "windows": "chromedriver*.exe",
+        "linux": "chromedriver*",
+        "darwin": "chromedriver*"
+    }.get(system, "chromedriver*")
+
+    candidates = glob.glob(os.path.join(drivers_dir, "**", pattern), recursive=True)
+    print(">>> raw candidates :", candidates)
+
+    platform_map = {"windows": "win", "linux": "linux", "darwin": "max"}
+    candidates = [
+        p for p in candidates
+        if os.path.basename(os.path.dirname(p)).lower() == platform_map[system]
+    ]
+    print(">>> candidates after filterd:", candidates)
+
+    if not candidates:
+        return None
+
+    driver_path = candidates[0]
+    if system != "windows":
+        os.chmod(driver_path, 0o755)
+    return driver_path
+
+@pytest.fixture(scope="function", autouse=True)
 def browser():
     opt = Options()
+    opt.add_argument("--window-size=1920,1080")
+    opt.add_argument("--disable-gpu")
     opt.add_argument("--headless=new")          # CI 无头
     opt.add_argument("--no-sandbox")
     opt.add_argument("--disable-dev-shm-usage")
-    # 本地驱动路径
-    driver = webdriver.Chrome(service=Service(r"D:\pycharm\chromedriver-win64\chromedriver-win64\chromedriver.exe"))
+
+    driver_path = _pick_local_driver()
+    print(">>> local candidates:", glob.glob(os.path.join(ROOT_DIR, "drivers", "**", "chromedriver*"),recursive=True))
+    print(">>> final driver_path:", driver_path)
+    if driver_path is None:
+        print(">>> 本地未命中，即将调用webdriver-manager...")
+        from webdriver_manager.chrome import ChromeDriverManager
+        driver_path = ChromeDriverManager().install()
+
+    service = Service(driver_path)
+    driver = webdriver.Chrome(service=service, options=opt)
     yield driver                                # 所有用例复用
     driver.quit()                               # 会话结束统一关

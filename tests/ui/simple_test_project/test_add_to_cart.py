@@ -1,8 +1,12 @@
 import pytest
+import time
+from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import base64
 
-
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def login(browser):
     browser.get("https://www.saucedemo.com")
     browser.find_element(By.ID, "user-name").send_keys("standard_user")
@@ -11,9 +15,23 @@ def login(browser):
 
 def test_add_to_cart(browser, login):
     browser.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
-    badge = browser.find_element(By.CLASS_NAME, "shopping_cart_badge")
+    print(">>> current URL :", browser.current_url)
+    print(">>> cart badge  :", browser.find_element(By.CLASS_NAME, "shopping_cart_badge").text)
+    badge = WebDriverWait(browser, 20).until(
+        EC.visibility_of_element_located((By.CLASS_NAME, "shopping_cart_badge"))
+    )
+
     assert badge.text == "1"
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable((By.ID, "remove-sauce-labs-backpack"))
+    )
+
     browser.find_element(By.CLASS_NAME, "shopping_cart_link").click()
-    items = browser.find_elements(By.CLASS_NAME, "cart_item")
+
+    WebDriverWait(browser, 10).until(EC.url_contains("cart"))
+
+    items = WebDriverWait(browser, 10).until(
+        EC.presence_of_all_elements_located((By.CLASS_NAME, "cart_item"))
+    )
     assert len(items) == 1

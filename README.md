@@ -1,17 +1,14 @@
-i# UI-Auto-Demo
+# Auto-Demo （main 开发分支）
 
-** 此分支为日常开发分支，CI可能处于失败状态，仅供迭代使用。**
-最小可运行集合 · Selenium + pytest
+** 此分支为日常开发分支**，CI可能处于失败状态，仅供迭代使用。
+** 稳定运行版本**请切换到
+[![CI](https://github.com/joy206/auto-demo/actions/workflows/ci.yml/badge.svg?branch=test-clean)](https://github.com/joy206/auto-demo/test-clean)
 
 ## 一键本地跑
 ```bash
 pip install -r requirements.txt
 pytest tests/ui -v
 ```
-
-## 当前任务
--[ ]补全selenium测试用例
--[ ]修改测试用例中的bug
 
 ## 技术栈
 | 技术     | 版本   |
@@ -20,7 +17,7 @@ pytest tests/ui -v
 | pytest   | 8.4.1  |
 | selenium | 4.35.0 |
 
-## 目录
+## 目录（补充中）
 tests/ui/
 ├── conftest.py         # 会话级浏览器
 ├── simple_test_project/ # 简单业务用例
