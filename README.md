@@ -19,9 +19,9 @@ pytest tests/ui -v
 
 ## 目录（补充中）
 tests/ui/
-├── conftest.py         # 会话级浏览器
+├── conftest.py          # 会话级浏览器
 ├── simple_test_project/ # 简单业务用例
 │   └── test_*.py
 ├── base_page_project/   # PO 模式业务用例
-requirements.txt        # 一键安装依赖
+requirements.txt         # 一键安装依赖
 .github/workflows/ci.yml # 云跑配置
