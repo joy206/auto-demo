@@ -1,6 +1,6 @@
 # Auto-Demo（test-clean 稳定版）
 
-![CI](https://github.com/joy206/auto-demo/workflows/CI/badge.svg)
+![CI](https://github.com/joy206/auto-demo/actions/workflows/ci.yml/badge.svg)
 
 最小可运行集合 · Selenium + pytest
 
