@@ -32,7 +32,7 @@ jobs:
       env:
         HEADLESS: true
       run: |
-        pytest tests/ui -v
+        pytest tests/ui -v --alluredir=allure-results
 
     - name: Install Allure commandline
       uses: simple-elf/allure-install-action@v1.0.1
@@ -44,9 +44,10 @@ jobs:
         allure generate allure-results -o allure-report --clean
 
     - name: Deploy report to GitHub Pages
-      if: always()
+      if: github.event_name == 'schedule'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: allure-report
         publish_branch: gh-pages
+	force_orphan: true
