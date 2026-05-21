@@ -5,8 +5,8 @@ on:
     branches: [test-clean]
   pull_request:
     branches: [test-clean]
-  # schedule:
-   # - cron: '11 14 * * *'
+  schedule:
+    - cron: '11 14 * * *'
 
 jobs:
   ui-test:
