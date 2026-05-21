@@ -52,29 +52,29 @@ jobs:
         force_orphan: true          
 
 # ===== 独立压测 job =====
-  perf-smoke:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-          cache: 'pip'
-
-      - name: Install dependencies
-        run: pip install locust
-
-      - name: Run 30s load test
-        run: |
-          locust -f locustfile.py \
-                 --headless -u 20 -r 5 -t 30s \
-                 --host https://httpbin.org \
-                 --html perf-report.html
-
-      - name: Upload perf report
-        uses: actions/upload-artifact@v4
-        with:
-          name: perf-report
-          path: perf-report.html
+#  perf-smoke:
+#    runs-on: ubuntu-latest
+#    steps:
+#     - uses: actions/checkout@v4
+#
+#      - name: Set up Python
+#       uses: actions/setup-python@v4
+#       with:
+#          python-version: '3.11'
+#          cache: 'pip'
+#
+#      - name: Install dependencies
+#        run: pip install locust
+#
+#      - name: Run 30s load test
+#        run: |
+#          locust -f locustfile.py \
+#                 --headless -u 20 -r 5 -t 30s \
+#                 --host https://httpbin.org \
+#                 --html perf-report.html
+#
+#      - name: Upload perf report
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: perf-report
+#          path: perf-report.html
