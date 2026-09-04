@@ -1,4 +1,4 @@
-\# Auto-Demo
+# Auto-Demo
 
 
 
@@ -6,11 +6,11 @@
 
 
 
-\---
+---
 
 
 
-\## 查看测试报告
+## 查看测试报告
 
 
 
@@ -22,11 +22,11 @@ https://joy206.github.io/auto-demo/
 
 
 
-\---
+---
 
 
 
-\## 获取 Docker 镜像
+## 获取 Docker 镜像
 
 
 
@@ -42,13 +42,13 @@ https://github.com/joy206/auto-demo/pkgs/container/swaglabs-tester
 
 
 
-\# 拉取最新镜像
+# 拉取最新镜像
 
 docker pull ghcr.io/joy206/swaglabs-tester:latest
 
 
 
-\# 运行测试（需要连接 Selenium Grid）
+# 运行测试（需要连接 Selenium Grid）
 
 docker run --rm -e SELENIUM\_REMOTE\_URL=http://your-grid:4444/wd/hub ghcr.io/joy206/swaglabs-tester:latest
 
@@ -56,7 +56,7 @@ docker run --rm -e SELENIUM\_REMOTE\_URL=http://your-grid:4444/wd/hub ghcr.io/jo
 
 
 
-\## CI/CD 流水线
+## CI/CD 流水线
 
 
 
@@ -64,19 +64,19 @@ docker run --rm -e SELENIUM\_REMOTE\_URL=http://your-grid:4444/wd/hub ghcr.io/jo
 
 
 
-1\. 启动 Selenium Grid
+1. 启动 Selenium Grid
 
-2\. 运行测试用例
+2. 运行测试用例
 
-3\. 生成 Allure 报告 → 部署到 GitHub Pages
+3. 生成 Allure 报告 → 部署到 GitHub Pages
 
-4\. 构建 Docker 镜像 → 推送到 ghcr.io
-
-
+4. 构建 Docker 镜像 → 推送到 ghcr.io
 
 
 
-\## 项目结构
+
+
+## 项目结构
 
 
 
@@ -84,7 +84,7 @@ docker run --rm -e SELENIUM\_REMOTE\_URL=http://your-grid:4444/wd/hub ghcr.io/jo
 
 ├── pages/              # Page Object 页面对象
 
-├── test\_cases/         # 测试用例
+├── test_cases/         # 测试用例
 
 ├── utils/              # 工具函数（日志、驱动）
 
@@ -96,7 +96,7 @@ docker run --rm -e SELENIUM\_REMOTE\_URL=http://your-grid:4444/wd/hub ghcr.io/jo
 
 │   └── workflows/
 
-│       └── ci.yml      # GitHub Actions CI 配置
+│       └── ci-docker.yml      # GitHub Actions CI 配置
 
 ├── Dockerfile          # 镜像构建文件
 
@@ -110,17 +110,17 @@ docker run --rm -e SELENIUM\_REMOTE\_URL=http://your-grid:4444/wd/hub ghcr.io/jo
 
 
 
-\## 技术栈
+## 技术栈
 
 
 
-\- Python 3.11
+- Python 3.11
 
-\- pytest 8.4.1
+- pytest 8.4.1
 
-\- Selenium 4.35.0
+- Selenium 4.35.0
 
-\- Docker 最新
+- Docker 最新
 
-\- Allure 2.x
+- Allure 2.x
 
