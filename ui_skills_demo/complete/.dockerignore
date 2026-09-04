@@ -1,0 +1,33 @@
+# 不要拷进容器的文件/目录
+
+# 本地 driver（容器里用不到）
+drivers/
+
+# 历史输出（容器里会重新生成）
+failed_screenshots/
+logs/
+allure-results/
+allure-report/
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.idea/
+.vscode/
+
+# 本地环境
+venv/
+.env
+
+# Docker 本身
+Dockerfile
+docker-compose.yml
+.dockerignore

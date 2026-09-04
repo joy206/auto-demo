@@ -1,0 +1,66 @@
+name: CI Docker
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start Selenium Grid
+        run: docker compose up -d selenium-hub chrome-node
+
+      - name: Wait for Grid
+        run: |
+          for i in {1..30}; do
+            curl -s http://localhost:4444/wd/hub/status | grep -q '"ready": true' && break
+            echo "Waiting for Grid... ($i)"
+            sleep 1
+          done
+
+      - name: Run tests
+        run: |
+          docker compose run --rm \
+            -e SELENIUM_REMOTE_URL=http://selenium-hub:4444/wd/hub \
+            -e BROWSER=chrome \
+            -e HEADLESS=true \
+            tester \
+            pytest ui_skills_demo/complete/test_cases -v --alluredir=allure-results
+
+      - name: Copy Allure results
+        run: |
+          mkdir -p ./allure-results
+          docker cp $(docker compose ps -q tester):/app/allure-results ./allure-results || true
+
+      - name: Generate Allure report
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          npm install -g allure-commandline
+          allure generate ./allure-results -o ./allure-report --clean
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          publish_branch: gh-pages
+          force_orphan: true
+
+      - name: Login to GitHub Container Registry
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build and push image
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.actor }}/swaglabs-tester
+          docker build -t $IMAGE_NAME:${{ github.sha }} -t $IMAGE_NAME:latest .
+          docker push $IMAGE_NAME:${{ github.sha }}
+          docker push $IMAGE_NAME:latest

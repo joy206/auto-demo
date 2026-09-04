@@ -1,0 +1,63 @@
+
+services:
+  # === Hub ===
+  selenium-hub:
+    image: selenium/hub:4.15.0
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"     # Grid Console，浏览器访问 http://localhost:4444
+      - "4442:4442"     # Event Bus 发布
+      - "4443:4443"     # Event Bus 订阅
+
+  # === Node ===
+  chrome-node:
+    image: selenium/node-chrome:4.15.0
+    container_name: chrome-node
+    shm_size: 2gb       # 避免 Chrome 崩溃
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=1
+
+  firefox-node:
+    image: selenium/node-firefox:4.15.0
+    container_name: firefox-node
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=1
+
+  edge-node:
+    image: selenium/node-edge:4.15.0
+    container_name: edge-node
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=1
+
+  # 测试代码容器
+  tester:
+    build: .
+    container_name: swaglabs-ui-tester
+    depends_on:
+      - selenium-hub:
+          condition: service_healthy  # 等 Hub 健康才启动
+    environment:
+      - SELENIUM_REMOTE_URL=http://selenium-hub:4444/wd/hub   # 连 Hub
+      - BROWSER=${BROWSER:-chrome}   # 指定浏览器
+      - PYTHONPATH=/app
+    volumes:
+      - ./allure-results:/app/allure-results
+    command: >
+      sh -c "sleep 10 && pytest ui_skills_demo/complete/test_cases -v --alluredir=allure-results"
