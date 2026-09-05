@@ -38,17 +38,13 @@ https://github.com/joy206/auto-demo/pkgs/container/swaglabs-tester
 
 
 
-拉取并运行：
-
-
-
-# 拉取最新镜像
+## 拉取最新镜像
 
 docker pull ghcr.io/joy206/swaglabs-tester:latest
 
 
 
-# 运行测试（需要连接 Selenium Grid）
+## 运行测试（需要连接 Selenium Grid）
 
 docker run --rm -e SELENIUM\_REMOTE\_URL=http://your-grid:4444/wd/hub ghcr.io/joy206/swaglabs-tester:latest
 
