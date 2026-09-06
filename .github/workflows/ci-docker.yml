@@ -61,6 +61,6 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           IMAGE_NAME=ghcr.io/${{ github.actor }}/swaglabs-tester
-          docker build -t $IMAGE_NAME:${{ github.sha }} -t $IMAGE_NAME:latest .
+          docker build -f ui_skills_demo/complete/Dockerfile -t $IMAGE_NAME:${{ github.sha }} -t $IMAGE_NAME:latest ui_skills_demo/complete
           docker push $IMAGE_NAME:${{ github.sha }}
           docker push $IMAGE_NAME:latest
