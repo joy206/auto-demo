@@ -51,8 +51,10 @@ services:
     build: .
     container_name: swaglabs-ui-tester
     depends_on:
-      - selenium-hub:
-          condition: service_healthy  # 等 Hub 健康才启动
+      selenium-hub:
+        condition: service_started
+      chrome-node:
+        condition: service_started
     environment:
       - SELENIUM_REMOTE_URL=http://selenium-hub:4444/wd/hub   # 连 Hub
       - BROWSER=${BROWSER:-chrome}   # 指定浏览器
