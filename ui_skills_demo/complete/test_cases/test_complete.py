@@ -39,8 +39,8 @@ class TestComplete:
 
             title = products_page.get_page_title()
             product_list = products_page.get_products_list()
-	
-	    WebDriverWait(driver, 10).until(EC.url_contains("inventory.html"))
+
+            WebDriverWait(driver, 10).until(EC.url_contains("inventory.html"))
 
             assert '/inventory.html' in driver.current_url, f"url不匹配，期望'/inventory.html'，实际{driver.current_url}"
             assert 'Products' in title, f"标题不匹配，期望'Products'，实际{title}"
