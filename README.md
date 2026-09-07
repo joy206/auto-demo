@@ -1,9 +1,11 @@
 # Auto-Demo
 
+\[!\[CI Docker](https://github.com/joy206/auto-demo/actions/workflows/ci-docker.yml/badge.svg)](https://github.com/joy206/auto-demo/actions/workflows/ci-docker.yml)
+
 
 
 基于 Selenium + Pytest 的 Swag Labs UI 自动化测试练习项目，支持 Docker 容器化运行，集成 GitHub Actions 持续集成。
-目录设置的比较多，要查看代码，请点击进入 ui_skills_demo/complete 目录。
+目录设置的比较多，要查看代码，请点击进入 ui\_skills\_demo/complete 目录。
 
 
 
@@ -54,11 +56,8 @@ docker run --rm -e SELENIUM\_REMOTE\_URL=http://your-grid:4444/wd/hub ghcr.io/jo
 
 
 1. 启动 Selenium Grid
-
 2. 运行测试用例
-
 3. 生成 Allure 报告 → 部署到 GitHub Pages
-
 4. 构建 Docker 镜像 → 推送到 ghcr.io
 
 
@@ -73,7 +72,7 @@ docker run --rm -e SELENIUM\_REMOTE\_URL=http://your-grid:4444/wd/hub ghcr.io/jo
 
 ├── pages/              # Page Object 页面对象
 
-├── test_cases/         # 测试用例
+├── test\_cases/         # 测试用例
 
 ├── utils/              # 工具函数（日志、驱动）
 
@@ -103,12 +102,9 @@ docker run --rm -e SELENIUM\_REMOTE\_URL=http://your-grid:4444/wd/hub ghcr.io/jo
 
 
 
-- Python 3.11
+* Python 3.11
+* pytest 8.4.1
+* Selenium 4.35.0
+* Docker 最新
+* Allure 2.x
 
-- pytest 8.4.1
-
-- Selenium 4.35.0
-
-- Docker 最新
-
-- Allure 2.x
