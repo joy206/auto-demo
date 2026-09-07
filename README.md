@@ -1,7 +1,6 @@
 # Auto-Demo
 
-\[!\[CI Docker](https://github.com/joy206/auto-demo/actions/workflows/ci-docker.yml/badge.svg)](https://github.com/joy206/auto-demo/actions/workflows/ci-docker.yml)
-
+[!\[CI Docker](https://github.com/joy206/auto-demo/actions/workflows/ci-docker.yml/badge.svg)]
 
 
 基于 Selenium + Pytest 的 Swag Labs UI 自动化测试练习项目，支持 Docker 容器化运行，集成 GitHub Actions 持续集成。
