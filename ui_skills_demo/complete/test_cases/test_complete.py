@@ -3,10 +3,11 @@
 """
 import allure
 import pytest
-
 from ui_skills_demo.complete.pages.checkinfo_page import CheckInfoPage
 from ui_skills_demo.complete.pages.complete_page import CompletePage
 from ui_skills_demo.complete.pages.overview_page import OverviewPage
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 @allure.feature("结算完成页")
