@@ -38,11 +38,21 @@ docker pull ghcr.io/joy206/swaglabs-tester:latest
 
 
 
+## 自动下载 Selenium Hub 并启动
+
+docker run -d --net grid --name selenium-hub -p 4444:4444 selenium/hub:latest
+
+
+
+## 自动下载 Chrome 浏览器节点并启动
+
+docker run -d --net grid -e SE_EVENT_BUS_HOST=selenium-hub -e SE_EVENT_BUS_PUBLISH_PORT=4442 -e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 --name chrome selenium/node-chrome:latest
+
+
+
 ## 运行测试（需要连接 Selenium Grid）
 
 docker run --rm -e SELENIUM\_REMOTE\_URL=http://your-grid:4444/wd/hub ghcr.io/joy206/swaglabs-tester:latest
-
-
 
 
 
