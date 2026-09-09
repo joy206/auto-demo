@@ -49,6 +49,7 @@ services:
   # 测试代码容器
   tester:
     build: .
+    image: ghcr.io/joy206/swaglabs-tester:latest
     container_name: swaglabs-ui-tester
     depends_on:
       selenium-hub:
