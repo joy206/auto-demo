@@ -1,0 +1,18 @@
+conftest.py - INFO - 测试用例【test_sort_products[price-high_to_low]】开始执行
+base_page.py - DEBUG - 初始化BasePage
+login_page.py - DEBUG - 初始化登录页LoginPage
+login_page.py - INFO - [登录]：用户名standard_user
+login_page.py - INFO - 打开登录页：https://www.saucedemo.com/
+base_page.py - DEBUG - 输入文本：('id', 'user-name') = standard_user
+base_page.py - DEBUG - 查找可见元素：('id', 'user-name')
+base_page.py - DEBUG - 输入文本：('id', 'password') = secret_sauce
+base_page.py - DEBUG - 查找可见元素：('id', 'password')
+base_page.py - DEBUG - 点击元素：('id', 'login-button')
+base_page.py - DEBUG - 查找可点击元素：('id', 'login-button')
+login_page.py - INFO - [登录]登录完成
+base_page.py - DEBUG - 初始化BasePage
+product_page.py - DEBUG - 初始化ProductPage
+base_page.py - DEBUG - 点击下拉框中的Price (high to low)
+base_page.py - DEBUG - 查找可见元素：('class name', 'product_sort_container')
+base_page.py - DEBUG - 查找所有匹配的可见元素: ('class name', 'inventory_item_price')
+conftest.py - INFO - 测试用例【test_sort_products[price-high_to_low]】执行结束

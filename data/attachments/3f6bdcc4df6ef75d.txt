@@ -1,0 +1,24 @@
+conftest.py - INFO - 测试用例【test_detail_add_to_cart】开始执行
+base_page.py - DEBUG - 初始化BasePage
+login_page.py - DEBUG - 初始化登录页LoginPage
+login_page.py - INFO - [登录]：用户名standard_user
+login_page.py - INFO - 打开登录页：https://www.saucedemo.com/
+base_page.py - DEBUG - 输入文本：('id', 'user-name') = standard_user
+base_page.py - DEBUG - 查找可见元素：('id', 'user-name')
+base_page.py - DEBUG - 输入文本：('id', 'password') = secret_sauce
+base_page.py - DEBUG - 查找可见元素：('id', 'password')
+base_page.py - DEBUG - 点击元素：('id', 'login-button')
+base_page.py - DEBUG - 查找可点击元素：('id', 'login-button')
+login_page.py - INFO - [登录]登录完成
+base_page.py - DEBUG - 初始化BasePage
+product_page.py - DEBUG - 初始化ProductPage
+base_page.py - DEBUG - 初始化BasePage
+detail_page.py - DEBUG - DetailPage页面实例化成功
+base_page.py - DEBUG - 点击元素：('class name', 'inventory_item_name')
+base_page.py - DEBUG - 查找可点击元素：('class name', 'inventory_item_name')
+base_page.py - DEBUG - 点击元素：('id', 'add-to-cart')
+base_page.py - DEBUG - 查找可点击元素：('id', 'add-to-cart')
+base_page.py - DEBUG - 查找匹配的所有元素：('class name', 'shopping_cart_badge')
+common_page.py - INFO - badge_amount: [<selenium.webdriver.remote.webelement.WebElement (session="fc8d7298a4c94d1374e9e3a990ef8df3", element="49ED64B59A2C9B10185381C24254D428_element_39")>]
+common_page.py - INFO - 1
+conftest.py - INFO - 测试用例【test_detail_add_to_cart】执行结束
