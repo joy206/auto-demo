@@ -4,7 +4,7 @@
 
 
 基于 Selenium + Pytest 的 Swag Labs UI 自动化测试练习项目，支持 Docker 容器化运行，集成 GitHub Actions 持续集成。
-目录设置的比较多，要查看代码，请点击进入 ui\_skills\_demo/complete 目录。
+目录设置的比较多，如果要查看代码，请点击进入 ui_skills_demo/complete 目录。
 
 
 
@@ -29,6 +29,18 @@ CI 自动构建的镜像已推送到 GitHub Container Registry：
 
 
 https://github.com/joy206/auto-demo/pkgs/container/swaglabs-tester
+
+
+
+## 前置准备
+
+
+
+# 克隆仓库（获取 docker-compose.yml）
+
+git clone https://github.com/joy206/auto-demo.git
+cd auto-demo
+
 
 
 
