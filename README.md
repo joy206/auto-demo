@@ -32,11 +32,9 @@ https://github.com/joy206/auto-demo/pkgs/container/swaglabs-tester
 
 
 
-## 前置准备
+## 前置准备 克隆仓库（获取 docker-compose.yml）
 
 
-
-# 克隆仓库（获取 docker-compose.yml）
 
 git clone https://github.com/joy206/auto-demo.git
 cd auto-demo
