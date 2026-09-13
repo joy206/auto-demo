@@ -20,7 +20,7 @@ https://joy206.github.io/auto-demo/
 
 
 
-## 获取 Docker 镜像
+## 前置准备
 
 
 
@@ -32,7 +32,7 @@ https://github.com/joy206/auto-demo/pkgs/container/swaglabs-tester
 
 
 
-## 前置准备 克隆仓库（获取 docker-compose.yml）
+## 克隆仓库（获取 docker-compose.yml）
 
 
 
