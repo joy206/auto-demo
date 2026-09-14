@@ -13,6 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Build image
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.actor }}/swaglabs-tester
+          docker build -f ui_skills_demo/complete/Dockerfile \
+            -t $IMAGE_NAME:test \
+            ui_skills_demo/complete
+
       - name: Start Selenium Grid
         run: docker compose -f ui_skills_demo/complete/docker-compose.yml up -d selenium-hub chrome-node
 
@@ -25,6 +32,8 @@ jobs:
           done
 
       - name: Run tests
+        env:
+          TAG: test
         run: |
           docker compose -f ui_skills_demo/complete/docker-compose.yml run --rm \
             -v ./allure-results:/app/allure-results \
@@ -57,10 +66,11 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Build and push image
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      - name: Push image
+        if: success() && github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           IMAGE_NAME=ghcr.io/${{ github.actor }}/swaglabs-tester
-          docker build -f ui_skills_demo/complete/Dockerfile -t $IMAGE_NAME:${{ github.sha }} -t $IMAGE_NAME:latest ui_skills_demo/complete
+          docker tag $IMAGE_NAME:test $IMAGE_NAME:${{ github.sha }}
+          docker tag $IMAGE_NAME:test $IMAGE_NAME:latest
           docker push $IMAGE_NAME:${{ github.sha }}
           docker push $IMAGE_NAME:latest
