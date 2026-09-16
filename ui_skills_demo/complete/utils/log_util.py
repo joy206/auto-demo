@@ -27,7 +27,7 @@ def setup_logger():
         "%Y_%m_%d %H:%M:%S"
     )
 
-    console_handler.setFormatter(file_handler)
+    console_handler.setFormatter(formatter)
     file_handler.setFormatter(formatter)
 
     swag_logger.addHandler(console_handler)
